@@ -608,7 +608,9 @@ $(RUSTFLAGS_FILE) : FORCE
 	diff -q $@ $@.tmp || cp $@.tmp $@
 	rm -f $@.tmp
 
-cargo_manifest=$(rust_srcdir)/Cargo.toml
+# Working around bug in how cargo identifies manifests without normalizing paths
+cargo_manifest=$(abs_top_srcdir)/rust_src/Cargo.toml
+
 LIBREMACS_ARCHIVE=$(rust_srcdir)/target/$(CARGO_BUILD_DIR)/libremacs.a
 $(LIBREMACS_ARCHIVE): $(rust_srcdir)/src/** $(rust_srcdir)/*.rs $(rust_srcdir)/Cargo.*
 	RUSTFLAGS=$(RUSTFLAGS) \

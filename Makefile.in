@@ -221,7 +221,8 @@ iconsrcdir=$(srcdir)/etc/images/icons
 
 # Root of rust src tree (where Cargo.toml is located).
 rust_srcdir=$(srcdir)/rust_src
-cargo_manifest=$(rust_srcdir)/Cargo.toml
+# Working around bug in how cargo identifies manifests without normalizing paths
+cargo_manifest=$(abs_srcdir)/rust_src/Cargo.toml
 
 # ==================== Emacs-specific directories ====================
 
